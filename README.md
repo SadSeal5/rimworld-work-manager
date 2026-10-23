@@ -4,17 +4,23 @@
 [![Language](https://img.shields.io/badge/Language-C%23-blue.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](#)
 
-**SadSeal's Work Manager** is a complete, high-performance re-architecture of the classic RimWorld Work Manager mod, engineered from scratch for modern RimWorld versions including **RimWorld 1.7 (.NET 10)** and **RimWorld 1.6**.
+An unofficial port and modernization of **LordKuper's** beloved [Work Manager](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262) mod, updated specifically for compatibility with modern RimWorld versions including **RimWorld 1.6** and **RimWorld 1.7 (.NET 10)**.
 
-Vanilla colony management requires tedious micro-management of the 1–4 manual work priorities and 24-hour schedules. Original work manager mods suffered from severe TPS degradation due to heavy runtime LINQ allocations, heap thrashing, and unoptimized 64-tick polling loops. **SadSeal's Work Manager** eliminates all GC pressure with a zero-allocation flat scoring architecture and throttled ticks while delivering intelligent priority assignments and circadian rhythm automation.
+---
+
+### 🙏 Credits & Acknowledgments
+
+* **Original Mod & Creator:** All credit for the brilliant design, concept, and original UI belongs to **[LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)**. 
+* **Unofficial 1.6 / 1.7 Port:** This project is an unofficial fan port created to allow players to continue enjoying LordKuper's essential mod on modern RimWorld runtime (.NET 10 / 1.7), rewritten with modern lightweight buffers to maintain high TPS in large late-game colonies.
+* If you are playing on older versions (1.1 – 1.5), please support and subscribe to the [original Work Manager by LordKuper on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262).
 
 ---
 
 ## ✨ Features
 
 * **🚀 Automated Dynamic Work Priorities (1–4):**
-  * Evaluates every colonist's skill levels (0–20), passions (+30 points for burning passion, +15 points for interested), physical capacities (manipulation, sight, moving, consciousness), traits, and ideology roles.
-  * Dynamically sets manual priorities from 1 (highest emergency / passion priority) to 4 (secondary chores) without player intervention.
+  * Evaluates colonist skill levels (0–20), passions (+30 points for burning passion, +15 points for interested), physical capacities (manipulation, sight, moving, consciousness), traits, and ideology roles.
+  * Dynamically assigns manual priorities from 1 (highest emergency / passion priority) to 4 (secondary chores) without requiring constant micro-management.
 * **🎯 Dedicated Specialist Quotas:**
   * Configurable dedicated worker targets per map for critical colonial roles:
     * 🩺 **Doctors:** Highest medical skill pawns prioritized for emergency medical tending.
@@ -23,29 +29,27 @@ Vanilla colony management requires tedious micro-management of the 1–4 manual 
     * 🗝️ **Wardens:** Social specialists dedicated to prison recruitment and colony diplomacy.
     * 🐾 **Handlers:** Animal specialists dedicated to training and taming without stalling.
 * **⚡ Idle Pawn Redirection:**
-  * When a specialized colonist has no active tasks in their primary work types, the system temporarily elevates hauling and cleaning priorities so colonists never wander idle.
+  * When a specialized colonist has no active tasks in their primary work types, the system temporarily elevates hauling and cleaning priorities so colonists stay productive.
 * **🌙 24-Hour Circadian Scheduling & Night Owl Automation:**
-  * Runs on in-game hourly intervals (2,500 ticks) instead of high-frequency tick polling.
   * **Day Colonists:** Balanced 8-hour sleep shifts, synchronized recreation blocks (morning and evening for social mood boosts), and structured work blocks.
-  * **Night Owls:** Detects the Night Owl trait and automatically shifts sleep to daytime (11:00–18:00) and recreation/work to night (23:00–07:00), guaranteeing permanent +16 mood bonuses.
+  * **Night Owls:** Detects the Night Owl trait and automatically shifts sleep to daytime (11:00–18:00) and recreation/work to night (23:00–07:00), maximizing positive mood buffs.
 * **🖥️ Seamless Work & Schedule Tab Integration:**
-  * Adds custom toggle columns (`Auto-Priorities` & `Auto-Schedule`) to the Work tab and Schedule tab.
+  * Adds custom toggle columns (`Auto-Priorities` & `Auto-Schedule`) to the Work and Schedule tabs.
   * Allows per-colonist automation toggles with a single click.
-  * Header buttons in the Work tab provide 1-click mod settings access and manual refresh.
-* **⚙️ Complete In-Game Mod Settings & Quick Presets:**
-  * **Balanced (Default):** 500-tick updates, balanced specialist quotas, idle redirection enabled.
-  * **High Performance (Ultra TPS):** 1,500-tick updates, ideal for gigantic 50+ pawn colonies.
-  * **Strict Specialist:** High thresholds, strictly limits roles to dedicated experts.
-  * **Reset to Defaults:** 1-click restore to original configurations.
+  * Header buttons in the Work tab provide quick mod settings access and manual refresh.
+* **⚙️ Complete In-Game Mod Settings & Presets:**
+  * **Presets:** *Balanced (Default)*, *High Performance*, *Strict Specialist*, and *Reset to Defaults*.
+  * Customizable update intervals, worker thresholds, and specialist quotas.
 * **🌐 Multilingual Support:** Complete English and Turkish (*Türkçe*) localization.
 
 ---
 
-## 🛠️ Performance & Engine Design
+## 🛠️ Modernization & Technical Details
 
-- **Zero Runtime Allocations:** Discards `LordKuper.Common.dll` and all LINQ query chains (`.Where().ToList()`). All scoring and ranking use static pre-allocated reusable arrays.
-- **Throttled Tick Intervals:** Priority balancing operates every 500 ticks (configurable 100–5,000), while schedule management operates strictly on hour boundaries (2,500 ticks).
-- **Persistent State:** Per-pawn manual overrides and disabled automation IDs are serialized directly with `Scribe_Collections` (`HashSet<int>`), surviving save/load cycles without data loss.
+- **RimWorld 1.7 (.NET 10) & 1.6 Compatibility:** Recompiled and adapted against modern RimWorld assemblies and runtime environments.
+- **Optimized Memory Usage:** Re-engineered priority calculations to use pre-allocated static buffers, eliminating GC heap allocations during periodic updates.
+- **Clock-Synchronized Scheduling:** Schedule checks are executed strictly on in-game hour changes (2,500 ticks) to keep simulation overhead minimal.
+- **Save Game Safe:** Uses standard RimWorld XML scribing (`HashSet<int>`); can be safely added to or removed from existing save files.
 
 ---
 
@@ -59,17 +63,17 @@ Vanilla colony management requires tedious micro-management of the 1–4 manual 
 ## 📦 Installation
 
 ### As Standalone Mod:
-1. Copy the `WorkManager` directory into your RimWorld `Mods/` directory:
+1. Place the `WorkManager` directory into your RimWorld `Mods/` folder:
    `RimWorld/Mods/WorkManager`
-2. Activate **Harmony** first, then activate **SadSeal's Work Manager** in the mod manager.
+2. In the RimWorld Mod Manager, place **Harmony** at the top, then activate **SadSeal's Work Manager**.
 
 ### As Part of SadSeal's Mega Mod:
-* This module is also fully integrated into **SadSeal's Mega Mod** under the **Work Manager** (`İş Yöneticisi`) tab in Mod Settings.
+* This module is also included in **SadSeal's Mega Mod** under the **Work Manager** (`İş Yöneticisi`) tab in Mod Settings.
 
 ---
 
-## 📜 License
+## 📜 License & Disclaimer
 
-Released under the [MIT License](LICENSE).
-Original inspiration from *Work Manager* by LordKuper.
-Re-architected and maintained by SadSeal5.
+- Original design, assets, and concepts © **LordKuper**.
+- Code adaptation and 1.7 port licensed under the [MIT License](LICENSE).
+- This is a non-commercial, community-maintained compatibility update.
