@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>SadSeal's Work Manager</name>
+  <author>SadSeal5 / Ramo</author>
+  <packageId>sadseal.workmanager</packageId>
+  <supportedVersions>
+    <li>1.5</li>
+    <li>1.6</li>
+    <li>1.7</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>fluffy.worktab</li>
+  </loadAfter>
+  <description>SadSeal's Work Manager is a high-performance, lightweight, automated work priority and colonist schedule manager engineered for RimWorld 1.6 &amp; 1.7 (.NET 10).
+
+Features:
+- Automated Work Priorities: Intelligently evaluates colonist skill levels, burning and minor passions, physical health capacities, and traits to dynamically assign manual 1-4 priorities.
+- Emergency Work Protection: Always guarantees Firefighting, Patient, Bed Rest, and Basic tasks are prioritized.
+- Dedicated Specialist Assignment: Assigns optimal specialist quotas for Doctors, Cooks, Researchers, Wardens, and Handlers.
+- Automated 24-Hour Scheduling: Distributes colonist timetables into balanced sleep, recreation, and work periods.
+- Dedicated Night Owl Support: Nocturnal colonists automatically receive inverted night shifts for permanent mood bonuses.
+- Idle Colonist Redirection: Idle pawns automatically receive temporary Hauling and Cleaning priorities to keep the colony spotless.
+- Zero TPS Overhead: Highly optimized architecture with zero per-tick allocations.
+- Full English and Turkish (Türkçe) localization.</description>
+</ModMetaData>
